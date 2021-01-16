@@ -11,8 +11,7 @@ const app = express()
 
 // Creation of API object
 var textapi = {
-    application_key: "1e974d78b7c20ecdd2f71f6a542ff5fa",
-    application_URL: "https://api.meaningcloud.com/sentiment-2.1"
+    application_URL: "http://api.geonames.org/searchJSON?"
 };
 
 let listeningPort = 8081;
@@ -46,12 +45,14 @@ app.get('/', function (req, res) {
 // 4. Receive API POST response and send it back to the client
 app.post('/apirequest', async function(req, res){
 
-    // Encode client request
-    const submittedURL = encodeURI(req.body.submittedURL)
-    // Craft API POST request
-    const fetchURL = textapi.application_URL+"?key="+textapi.application_key+"&of=json&url="+submittedURL+"&model=general&lang=en"
+    //console.log(req.body.cName)
+    const userCityName = req.body.cName
+    const geonameRequestURL = encodeURI(textapi.application_URL+"q="+userCityName+"&maxRows=1&username=greenteajha")
+
+
+    console.log(geonameRequestURL)
     // Submit API POST and wait for response
-    const response = await fetch (fetchURL)
+    const response = await fetch (geonameRequestURL)
 
     let analysisResult = {}
 
@@ -60,13 +61,9 @@ app.post('/apirequest', async function(req, res){
         // Store response into an object to send back to the client-side
         const data = await response.json()
 
-        analysisResult = {
-            resultScoretag: data.score_tag,
-            resultAgreement: data.agreement,
-            resultSubjectivity: data.subjectivity,
-            resultConfidence: data.confidence,
-            resultIrony: data.irony,
-        }
+        console.log(`Longitude: ${data.geonames[0].lng}`)
+        console.log(`Latitude: ${data.geonames[0].lat}`)
+        console.log(`Country Name: ${data.geonames[0].countryName}`)
             
         // Send response back to the client-side
         res.send(analysisResult)

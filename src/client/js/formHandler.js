@@ -27,16 +27,54 @@ function handleSubmit(event) {
 
     event.preventDefault()
 
+    let countDown = document.getElementById('results')
+    countDown.innerHTML = ''
+
     const cName = document.getElementById('countryName').value;
     const depDate = document.getElementById('depDate').value;
 
     console.log(cName)
     console.log(depDate)
 
-    retrieveResults({cName, depDate})
+    const todayDate = new Date()
+
+    console.log(todayDate)
+
+    const dateDifference = Math.floor((Date.parse(depDate) - todayDate)/(1000 * 60 * 60 * 24))
+
+    console.log(dateDifference)
+
+    retrieveResults({cName, depDate, dateDifference})
+    .then(
+        function(result){
+            console.log(result)
+
+            let countDownValue = document.createElement('div')
+            countDownValue.setAttribute('id','countDown')
+            countDownValue.innerHTML = `${dateDifference} days till departure date!`
+            countDown.appendChild(countDownValue)
+
+            let minTempValue = document.createElement('div')
+            minTempValue.setAttribute('id','minTemp')
+            minTempValue.innerHTML = `The minimum temperature is ${result.destMinTemp}`
+            countDown.appendChild(minTempValue)
+
+            let maxTempValue = document.createElement('div')
+            maxTempValue.setAttribute('id','maxTemp')
+            maxTempValue.innerHTML = `The maximum temperature is ${result.destMaxTemp}`
+            countDown.appendChild(maxTempValue)
+
+            let imgPlaceHolder = document.createElement('img')
+            imgPlaceHolder.setAttribute('src', result.destImgSource)
+            countDown.appendChild(imgPlaceHolder)
+
+        }
+    )
 
     
 
+
+    
 }
 
 export { handleSubmit }

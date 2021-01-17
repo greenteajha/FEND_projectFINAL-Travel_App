@@ -1,15 +1,12 @@
 // Including all dependencies
+// Node-fetch module to provide fetch API capabilities
 const fetch = require("node-fetch");
 
 // Module that loads environment variables from a .env file into process.env
 const dotenv = require('dotenv');
 dotenv.config();
 
-// Express to run server and routes
-const express = require('express') 
-const app = express()
-
-// Creation of API object
+// Creation of API object values
 const apiInfo = {
     geoName_URL: "http://api.geonames.org/searchJSON?",
     weatherBit_URL: "https://api.weatherbit.io/v2.0/forecast/daily?",
@@ -18,26 +15,32 @@ const apiInfo = {
     pixabay_API_Key: "19911908-8e571d0f064087efeb45caed2"
 };
 
-let listeningPort = 8081;
+// Express to run server and routes
+const express = require('express') 
+const app = express()
 
-// Add body-parser dependencies
+// Use the bodyParser module
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Use Cors
+// Use Cors module
 const cors = require('cors');
-const { TestScheduler } = require('jest');
 app.use(cors());
+
+// Use Jest for unit testing
+const { TestScheduler } = require('jest');
 
 // Initialize the "dist" folder
 app.use(express.static('dist'));
 
 // designates what port the app will listen to for incoming requests
+let listeningPort = 8081;
 app.listen(listeningPort, function () {
     console.log('Example app listening on port 8081!')
 })
 
+// Deliver index.html file main page to web clients
 app.get('/', function (req, res) {
     res.sendFile(path.resolve('dist/index.html'))
 })
@@ -49,79 +52,82 @@ app.get('/', function (req, res) {
 // 4. Receive API POST response and send it back to the client
 app.post('/apirequest', async function(req, res){
 
-    //console.log(req.body.cName)
+    // Take the user input
     const userCityName = req.body.cName
     const userDateDiff = req.body.dateDifference
+
+    // Build API request to GeoNames
     const geoNameRequestURL = encodeURI(`${apiInfo.geoName_URL}name_startsWith=${userCityName}&maxRows=1&username=greenteajha`)
-
-
-    console.log(geoNameRequestURL)
-    // Submit API POST and wait for response
     const geoNameResponse = await fetch (geoNameRequestURL)
 
     try{
 
-        // Store response into an object to send back to the client-side
+        // Store GeoNames response for later use
         const geoNameData = await geoNameResponse.json()
-        
-        console.log(geoNameData)
 
         if(geoNameData.totalResultsCount == 0){
+            
             console.log("No such place!")
+
+            // Store Pixabay response for later use
+            const pixabayRequestURL = encodeURI(`${apiInfo.pixabay_URL}key=${apiInfo.pixabay_API_Key}&q=worldmap&image_type=photo`)
+            const pixabayResponse = await fetch(pixabayRequestURL)
+
+            try{
+
+                const pixabayData = await pixabayResponse.json()
+                const destImgSource = pixabayData.hits[0].webformatURL
+                const destMinTemp = 'NIL'
+                const destMaxTemp = 'NIL'
+            
+                // Send response back to the client-side
+                const apiResults = {destMinTemp, destMaxTemp, destImgSource}
+                res.send(apiResults)
+
+            } catch (Error){
+                console.log("ERROR MESSAGE: ", Error)
+            }
+
         }else{
             
             const geoNamesLat = geoNameData.geonames[0].lat
             const geoNamesLon = geoNameData.geonames[0].lng
             const geoNamesCountry = geoNameData.geonames[0].countryName
     
+            // Build API request to Weatherbit
             const weatherBitRequestURL = encodeURI(`${apiInfo.weatherBit_URL}lat=${geoNamesLat}&lon=${geoNamesLon}&key=${apiInfo.weatherBit_API_Key}`)
-    
-            console.log(weatherBitRequestURL)
-    
             const weatherBitResponse = await fetch (weatherBitRequestURL)
     
             try{
     
+                // Store Weatherbit response for later use
                 const weatherBitData = await weatherBitResponse.json()
-    
-                //console.log(weatherBitData)
-    
                 let weatherBitTemp = '';
     
-                if(userDateDiff < 16){
-    
-                    weatherBitTemp = weatherBitData.data[userDateDiff-1]
-    
-                }else{
-    
-                    weatherBitTemp = weatherBitData.data[weatherBitData.data.length-1]
-    
+                // Checks how many days before the travel start date. If...
+                // ... Less than 16 days (Since Weatherbit only fetches a maximum of 16 days forecasted date),
+                // .... choose the temperature data of the actual date itself
+                // ... 16 days or more, take the 16th day temperature data
+                if(userDateDiff < 16){   
+                    weatherBitTemp = weatherBitData.data[userDateDiff]    
+                }else{    
+                    weatherBitTemp = weatherBitData.data[weatherBitData.data.length-1]    
                 }
-    
+
                 const destMinTemp = weatherBitTemp.min_temp
                 const destMaxTemp = weatherBitTemp.max_temp
-    
-                console.log(`Min. Temperature is ${weatherBitTemp.min_temp}`)
-                console.log(`Max. Temperature is ${weatherBitTemp.max_temp}`)
-    
+
+                // Store Pixabay response for later use
                 const pixabayRequestURL = encodeURI(`${apiInfo.pixabay_URL}key=${apiInfo.pixabay_API_Key}&q=${geoNamesCountry}&image_type=photo`)
-    
-                console.log(pixabayRequestURL)
-    
                 const pixabayResponse = await fetch(pixabayRequestURL)
     
                 try{
     
                     const pixabayData = await pixabayResponse.json()
-    
-                    console.log (pixabayData.hits[0].webformatURL)
-    
                     const destImgSource = pixabayData.hits[0].webformatURL
                 
                     // Send response back to the client-side
-    
                     const apiResults = {destMinTemp, destMaxTemp, destImgSource}
-    
                     res.send(apiResults)
     
                 } catch (Error){
@@ -131,7 +137,6 @@ app.post('/apirequest', async function(req, res){
             } catch (Error){
                 console.log("ERROR MESSAGE: ", Error)
             }
-
         }
         
     } catch (Error){

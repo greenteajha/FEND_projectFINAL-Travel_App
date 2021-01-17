@@ -27,46 +27,54 @@ function handleSubmit(event) {
 
     event.preventDefault()
 
-    let countDown = document.getElementById('results')
-    countDown.innerHTML = ''
+    let userResults = document.getElementById('results')
+    userResults.innerHTML = ''
 
     const cName = document.getElementById('countryName').value;
-    const depDate = document.getElementById('depDate').value;
+    const uStartDate = document.getElementById('startDate').value;
+    const uEndDate = document.getElementById('endDate').value;
 
     console.log(cName)
-    console.log(depDate)
+    console.log(uStartDate)
 
     const todayDate = new Date()
 
     console.log(todayDate)
 
-    const dateDifference = Math.floor((Date.parse(depDate) - todayDate)/(1000 * 60 * 60 * 24))
+    const dateDifference = Math.round((Date.parse(uStartDate) - todayDate)/(1000 * 60 * 60 * 24))
+    const tripLength = Math.round((Date.parse(uEndDate) - Date.parse(uStartDate))/(1000 * 60 * 60 * 24))
 
     console.log(dateDifference)
 
-    retrieveResults({cName, depDate, dateDifference})
+    retrieveResults({cName, startDate, dateDifference})
     .then(
         function(result){
             console.log(result)
 
-            let countDownValue = document.createElement('div')
-            countDownValue.setAttribute('id','countDown')
-            countDownValue.innerHTML = `${dateDifference} days till departure date!`
-            countDown.appendChild(countDownValue)
+            let startDate = document.createElement('div')
+            startDate.setAttribute('id','startDate')
+            startDate.innerHTML = `Your travel starts on the: ${uStartDate} and will last for ${tripLength} days!`
+            userResults.appendChild(startDate)
 
-            let minTempValue = document.createElement('div')
-            minTempValue.setAttribute('id','minTemp')
-            minTempValue.innerHTML = `The minimum temperature is ${result.destMinTemp}`
-            countDown.appendChild(minTempValue)
+            let countDown = document.createElement('div')
+            countDown.setAttribute('id','countDown')
+            countDown.innerHTML = `${dateDifference} days till departure date!`
+            userResults.appendChild(countDown)
 
-            let maxTempValue = document.createElement('div')
-            maxTempValue.setAttribute('id','maxTemp')
-            maxTempValue.innerHTML = `The maximum temperature is ${result.destMaxTemp}`
-            countDown.appendChild(maxTempValue)
+            let minTemp = document.createElement('div')
+            minTemp.setAttribute('id','minTemp')
+            minTemp.innerHTML = `The minimum temperature is: ${result.destMinTemp} degrees celcius`
+            userResults.appendChild(minTemp)
+
+            let maxTemp = document.createElement('div')
+            maxTemp.setAttribute('id','maxTemp')
+            maxTemp.innerHTML = `The maximum temperature is: ${result.destMaxTemp} degrees celcius`
+            userResults.appendChild(maxTemp)
 
             let imgPlaceHolder = document.createElement('img')
+            imgPlaceHolder.setAttribute('id','imgPlaceHolder')
             imgPlaceHolder.setAttribute('src', result.destImgSource)
-            countDown.appendChild(imgPlaceHolder)
+            userResults.appendChild(imgPlaceHolder)
 
         }
     )

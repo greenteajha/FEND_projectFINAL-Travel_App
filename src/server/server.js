@@ -127,7 +127,7 @@ app.post('/apirequest', async function(req, res){
                     const destImgSource = pixabayData.hits[0].webformatURL
                 
                     // Send response back to the client-side
-                    const apiResults = {destMinTemp, destMaxTemp, destImgSource}
+                    const apiResults = {destMinTemp, destMaxTemp, destImgSource, geoNamesCountry}
                     res.send(apiResults)
     
                 } catch (Error){

@@ -114,8 +114,12 @@ app.post('/apirequest', async function(req, res){
                     weatherBitTemp = weatherBitData.data[weatherBitData.data.length-1]    
                 }
 
+                console.log(weatherBitTemp)
+
                 const destMinTemp = weatherBitTemp.min_temp
                 const destMaxTemp = weatherBitTemp.max_temp
+                const weatherIconLink = `https://www.weatherbit.io/static/img/icons/${weatherBitTemp.weather.icon}.png`
+                const weatherDesc = weatherBitTemp.weather.description
 
                 // Store Pixabay response for later use
                 const pixabayRequestURL = encodeURI(`${apiInfo.pixabay_URL}key=${apiInfo.pixabay_API_Key}&q=${geoNamesCountry}&image_type=photo`)
@@ -127,7 +131,7 @@ app.post('/apirequest', async function(req, res){
                     const destImgSource = pixabayData.hits[0].webformatURL
                 
                     // Send response back to the client-side
-                    const apiResults = {destMinTemp, destMaxTemp, destImgSource, geoNamesCountry}
+                    const apiResults = {destMinTemp, destMaxTemp, destImgSource, geoNamesCountry, weatherIconLink, weatherDesc}
                     res.send(apiResults)
     
                 } catch (Error){

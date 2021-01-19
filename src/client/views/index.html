@@ -5,24 +5,48 @@
         <title>Travel Application</title>
     </head>
     <body>
-
-        <header>
-            <div class="pageTitle">
-                <h1>Travel Application</h1>
-            </div>
-        </header>
-        <main>
-            <section id="formSubmission">
-                <form>
-                    <input id="tripName" type="text" placeholder="Enter Trip Name...">
-                    <input id="countryName" type="text" placeholder="Enter City Name...">  
-                    <input id="startDate" type="date">
-                    <input id="endDate" type="date">
-                    <input type="submit" id="retrieve" value="submit">
-                </form>
+        <div id="overallContainer">
+            <header>
+                <div class="pageTitle">
+                    <h1>Travel Application</h1>
+                </div>
+            </header>
+            <main>
+                <section id="formSubmission">
+                    <form>
+                        <div id="inputFields" class="fieldContainer">
+                            <div id="tripContainer" class="inputContainer">
+                                <h3>Trip Name</h3>
+                                <input id="tripName" class="formFields" type="text" placeholder="Enter Trip Name...">
+                            </div>
+                            <div id="countryContainer" class="inputContainer">
+                                <h3>Country Name</h3>
+                                <input id="countryName" class="formFields" type="text" placeholder="Enter City Name...">
+                            </div>
+                        </div>  
+                        <div id="dateFields" class="fieldContainer">
+                            <div id="startDateContainer" class="dateContainer">
+                                <h3>Start Date</h3>
+                                <input id="startDate" class="formFields" type="date">
+                            </div>
+                            <div id="endDateContainer" class="dateContainer">
+                                <h3>End Date</h3>
+                                <input id="endDate" class="formFields" type="date">
+                            </div>
+                        </div>
+                        <div id="buttonFields" class="fieldContainer">
+                            <div id="submitContainer">
+                                <input type="submit" class="fieldButtons" id="retrieve" value="Submit">
+                            </div>
+                            <div id="printContainer">
+                                <button id="printPage" class="fieldButtons">Print This Page!</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
                 <div id="results"></div>
-            </section>
-        </main>
+            </main>
+        </div>
     <script>
         /*
         // Check that service workers are supported

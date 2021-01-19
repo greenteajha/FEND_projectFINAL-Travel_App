@@ -1,0 +1,107 @@
+$xsDeviceMax: 600px;
+$sDeviceMax: 767px;
+$mDeviceMax: 991px;
+$lDeviceMax: 1199px;
+$xlDeviceMin: 1200px;
+
+html{
+    background: url("../media/background-image.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+#overallContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 0.8fr;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+h1{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#formSubmission{
+    background-color: white;
+    border-radius: 15px;
+    margin: 0px;
+
+    .fieldContainer{
+        padding: 15px;
+    }
+
+    .formFields{
+        font-size: 20px;
+        width: 80%;
+        height: 30px;
+        margin: 0px;
+        padding: 10px;
+    }
+
+    h3{
+        margin: 0px;
+        padding: 10px;
+        font-size: 30px;
+    }
+
+}
+
+#inputFields{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+}
+
+#dateFields{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dateContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+}
+
+#buttonFields{
+    display: flex;
+    justify-content: space-evenly;
+
+    .fieldButtons{
+        background-color: #73EBD3;
+        color: black;
+        border-radius: 10px;
+        border: 0px;
+        width: 250px;
+        height: 30px;
+        font-size: 25px;
+    }
+}
+
+.tripSection{
+    background-color: white;
+    border-radius: 15px;
+}

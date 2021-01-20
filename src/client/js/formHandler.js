@@ -77,9 +77,68 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     tripSection.setAttribute('id', fTripName)
     fUserResult.appendChild(tripSection)
 
+    // Trip Heading
+    let tripHeading = document.createElement('div')
+    tripHeading.setAttribute('class','tripHeadingContainer')
+    tripSection.appendChild(tripHeading)
+
+    // Trip Heading Left column
+    let lTripHeading = document.createElement('div')
+    lTripHeading.setAttribute('class','lTripHeadingContainer')
+    tripHeading.appendChild(lTripHeading)
+
+    // Trip Name
     let tripName = document.createElement('h2')
     tripName.innerHTML = fTripName
-    tripSection.appendChild(tripName)
+    lTripHeading.appendChild(tripName)
+
+    // Destination Name
+    let destName = document.createElement('div')
+    destName.setAttribute('class','destName')
+    destName.setAttribute('id', `destName-${fTripName}`)
+    destName.innerHTML = `${fResult.geoNamesCountry}, ${fDestinationName}`
+    lTripHeading.appendChild(destName)
+
+    // Trip Heading Right column
+    let rTripHeading = document.createElement('div')
+    rTripHeading.setAttribute('class','rTripHeadingContainer')
+    tripHeading.appendChild(rTripHeading)    
+
+    let hotelHeading = document.createElement('div')
+    hotelHeading.setAttribute('class','hotelHeading')
+    rTripHeading.appendChild(hotelHeading)    
+
+    // Add hotel details
+    let addHotelField = document.createElement('input')
+    addHotelField.setAttribute('type', 'text')
+    addHotelField.setAttribute('class',`addHotelField`)
+    addHotelField.setAttribute('id',`${fTripName}-addHotelField`)
+    hotelHeading.appendChild(addHotelField)
+
+    let addHotelButton = document.createElement('button')
+    addHotelButton.innerHTML = 'Add Hotel'
+    addHotelButton.setAttribute('class', `addHotelFieldButton`)
+    addHotelButton.setAttribute('name', `${fTripName}-addHotelField`)
+    addHotelButton.addEventListener('click', addHotel)
+    hotelHeading.appendChild(addHotelButton)
+
+    let flightHeading = document.createElement('div')
+    flightHeading.setAttribute('class','hotelHeading')
+    rTripHeading.appendChild(flightHeading)
+
+    // Add flight details
+    let addFlightField = document.createElement('input')
+    addFlightField.setAttribute('type', 'text')
+    addFlightField.setAttribute('class', 'addFlightField')
+    addFlightField.setAttribute('id',`${fTripName}-addFlightField`)
+    flightHeading.appendChild(addFlightField)
+
+    let addFlightButton = document.createElement('button')
+    addFlightButton.innerHTML = 'Add Flight'
+    addFlightButton.setAttribute('class', 'addFlightFieldButton')
+    addFlightButton.setAttribute('name', `${fTripName}-addFlightField`)
+    addFlightButton.addEventListener('click', addFlight)
+    flightHeading.appendChild(addFlightButton)
 
     let removeButton = document.createElement('button')
     removeButton.innerHTML = 'Remove'
@@ -116,40 +175,6 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     destSection.setAttribute('id',`${fTripName}-${fDestinationName}`)
     destSection.setAttribute('class', 'destinationSection')
     tripSection.appendChild(destSection)
-
-    // Add hotel details
-    let addHotelField = document.createElement('input')
-    addHotelField.setAttribute('type', 'text')
-    addHotelField.setAttribute('class',`addHotelField`)
-    addHotelField.setAttribute('id',`${fTripName}-addHotelField`)
-    destSection.appendChild(addHotelField)
-
-    let addHotelButton = document.createElement('button')
-    addHotelButton.innerHTML = 'Add Hotel'
-    addHotelButton.setAttribute('class', `addHotelFieldButton`)
-    addHotelButton.setAttribute('name', `${fTripName}-addHotelField`)
-    addHotelButton.addEventListener('click', addHotel)
-    destSection.appendChild(addHotelButton)
-
-    // Add flight details
-    let addFlightField = document.createElement('input')
-    addFlightField.setAttribute('type', 'text')
-    addFlightField.setAttribute('class', 'addFlightField')
-    addFlightField.setAttribute('id',`${fTripName}-addFlightField`)
-    destSection.appendChild(addFlightField)
-
-    let addFlightButton = document.createElement('button')
-    addFlightButton.innerHTML = 'Add Flight'
-    addFlightButton.setAttribute('class', 'addFlightFieldButton')
-    addFlightButton.setAttribute('name', `${fTripName}-addFlightField`)
-    addFlightButton.addEventListener('click', addFlight)
-    destSection.appendChild(addFlightButton)
-
-    let destName = document.createElement('div')
-    destName.setAttribute('class','destName')
-    destName.setAttribute('id', `destName-${fTripName}`)
-    destName.innerHTML = `Your destination is: ${fResult.geoNamesCountry}, ${fDestinationName}`
-    destSection.appendChild(destName)
 
     let hotelHolder = document.createElement('div')
     hotelHolder.setAttribute('class', 'addHotelField-Holder')

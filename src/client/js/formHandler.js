@@ -25,12 +25,12 @@ function addHotel(event){
     const hotelName = document.getElementById(hotelField).value
     const hotelNHolder = document.getElementById(`${hotelField}-Holder`)
 
-    const hotelH = document.getElementById(`hotelHeader-${hotelName}`)
+    const hotelH = document.getElementById(`hotelHeader-${hotelField}`)
 
     if(hotelH == null){
 
         let hotelHead = document.createElement('h2')
-        hotelHead.setAttribute('id',`hotelHeader-${hotelName}`)
+        hotelHead.setAttribute('id',`hotelHeader-${hotelField}`)
         hotelHead.innerHTML = 'Hotel(s)'
         hotelNHolder.appendChild(hotelHead)
 
@@ -55,17 +55,17 @@ function addFlight(event){
 
     if(flightH == null){
 
-        let fieldHead = document.createElement('h2')
-        fieldHead.setAttribute('id',`flightHeader-${flightField}`)
-        fieldHead.innerHTML = 'Flight(s)'
-        flightNHolder.appendChild(fieldHead)
+        let flightHead = document.createElement('h2')
+        flightHead.setAttribute('id',`flightHeader-${flightField}`)
+        flightHead.innerHTML = 'Flight(s)'
+        flightNHolder.appendChild(flightHead)
 
     }
 
-    let fieldPlaceHolder = document.createElement('div')
-    fieldPlaceHolder.innerHTML = flightName
-    fieldPlaceHolder.setAttribute('class','flightName')
-    flightNHolder.appendChild(fieldPlaceHolder)
+    let flightPlaceHolder = document.createElement('div')
+    flightPlaceHolder.innerHTML = flightName
+    flightPlaceHolder.setAttribute('class','flightName')
+    flightNHolder.appendChild(flightPlaceHolder)
 
 }
 
@@ -123,7 +123,7 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     hotelHeading.appendChild(addHotelButton)
 
     let flightHeading = document.createElement('div')
-    flightHeading.setAttribute('class','hotelHeading')
+    flightHeading.setAttribute('class','flightHeading')
     rTripHeading.appendChild(flightHeading)
 
     // Add flight details
@@ -140,23 +140,55 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     addFlightButton.addEventListener('click', addFlight)
     flightHeading.appendChild(addFlightButton)
 
-    let removeButton = document.createElement('button')
-    removeButton.innerHTML = 'Remove'
-    removeButton.setAttribute('name', fTripName)
-    removeButton.addEventListener('click',removeTrip)
-    tripSection.appendChild(removeButton)
-    
+    // Trip Middle
+    let tripMiddle = document.createElement('div')
+    tripMiddle.setAttribute('class','tripMiddleContainer')
+    tripSection.appendChild(tripMiddle)
 
-    let startDate = document.createElement('div')
-    startDate.setAttribute('class','startDate')
-    startDate.setAttribute('id',`${fTripName}-startDate`)
-    if(fTripLength == 0){
-        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for the day itself!`
+    // Trip Middle Left column
+    let lTripMiddle = document.createElement('div')
+    lTripMiddle.setAttribute('class','lTripMiddleContainer')
+    tripMiddle.appendChild(lTripMiddle)
 
-    }else{
-        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for ${fTripLength} day(s)!`
-    }
-    tripSection.appendChild(startDate)
+    // Country image
+    let imgPlaceHolder = document.createElement('img')
+    imgPlaceHolder.setAttribute('class','imgPlaceHolder')
+    imgPlaceHolder.setAttribute('id', `${fTripName}-imgPlaceHolder`)
+    imgPlaceHolder.setAttribute('src', fResult.destImgSource)
+    lTripMiddle.appendChild(imgPlaceHolder)
+
+    // Trip Middle Right column
+    let rTripMiddle = document.createElement('div')
+    rTripMiddle.setAttribute('class','rTripMiddleContainer')
+    tripMiddle.appendChild(rTripMiddle)
+
+    // Minimum Temperature
+    let minTemp = document.createElement('div')
+    minTemp.setAttribute('class','minTemp')
+    minTemp.setAttribute('id',`${fTripName}-minTemp`)
+    minTemp.innerHTML = `Min. Temp: ${fResult.destMinTemp} degrees celcius`
+    rTripMiddle.appendChild(minTemp)
+
+    // Maximum Temperature
+    let maxTemp = document.createElement('div')
+    maxTemp.setAttribute('class','maxTemp')
+    maxTemp.setAttribute('id', `${fTripName}-maxTemp`)
+    maxTemp.innerHTML = `Max. Temp: ${fResult.destMaxTemp} degrees celcius`
+    rTripMiddle.appendChild(maxTemp)
+
+    // Weather Description
+    let weatherDescription = document.createElement('div')
+    weatherDescription.setAttribute('class', 'weatherDesc')
+    weatherDescription.setAttribute('id', `${fTripName}-weatherDesc`)
+    weatherDescription.innerHTML = `Weather Forecast: ${fResult.weatherDesc}`
+    rTripMiddle.appendChild(weatherDescription)
+
+    // Weather Icon
+    let weatherIcon = document.createElement('img')
+    weatherIcon.setAttribute('src',fResult.weatherIconLink)
+    weatherIcon.setAttribute('class', 'weatherIcon')
+    weatherIcon.setAttribute('id', `${fTripName}-weatherIcon`)
+    rTripMiddle.appendChild(weatherIcon)
 
     let countDown = document.createElement('div')
     countDown.setAttribute('value',fDateDifference)
@@ -169,52 +201,59 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     }else{
         countDown.innerHTML = `${fDateDifference} days till departure date!`
     }
-    tripSection.appendChild(countDown)
+    rTripMiddle.appendChild(countDown)
 
+    // Start Date
+    let startDate = document.createElement('div')
+    startDate.setAttribute('class','startDate')
+    startDate.setAttribute('id',`${fTripName}-startDate`)
+    if(fTripLength == 0){
+        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for the day itself!`
+
+    }else{
+        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for ${fTripLength} day(s)!`
+    }
+    rTripMiddle.appendChild(startDate)
+
+    // Trip End
+    let tripEnd = document.createElement('div')
+    tripEnd.setAttribute('class','tripEndContainer')
+    tripSection.appendChild(tripEnd)
+
+    // Trip End Left column
+    let lTripEnd = document.createElement('div')
+    lTripEnd.setAttribute('class','lTripEndContainer')
+    tripEnd.appendChild(lTripEnd)
+
+    // Hotel Information
+    let hotelHolder = document.createElement('div')
+    hotelHolder.setAttribute('class', 'addHotelField-Holder')
+    hotelHolder.setAttribute('id',`${fTripName}-addHotelField-Holder`)
+    lTripEnd.appendChild(hotelHolder)
+
+    // Trip End Right column
+    let rTripEnd = document.createElement('div')
+    rTripEnd.setAttribute('class','rTripEndContainer')
+    tripEnd.appendChild(rTripEnd)
+
+    // Flight Information
+    let flightHolder = document.createElement('div')
+    flightHolder.setAttribute('class', 'addFlightField-Holder')
+    flightHolder.setAttribute('id',`${fTripName}-addFlightField-Holder`)
+    rTripEnd.appendChild(flightHolder)
+
+    let removeButton = document.createElement('button')
+    removeButton.innerHTML = 'Remove'
+    removeButton.setAttribute('name', fTripName)
+    removeButton.setAttribute('class', 'removeButtons')
+    removeButton.addEventListener('click',removeTrip)
+    tripSection.appendChild(removeButton)
+/*
     let destSection = document.createElement('div')
     destSection.setAttribute('id',`${fTripName}-${fDestinationName}`)
     destSection.setAttribute('class', 'destinationSection')
     tripSection.appendChild(destSection)
-
-    let hotelHolder = document.createElement('div')
-    hotelHolder.setAttribute('class', 'addHotelField-Holder')
-    hotelHolder.setAttribute('id',`${fTripName}-addHotelField-Holder`)
-    destSection.appendChild(hotelHolder)
-
-    let flightHolder = document.createElement('div')
-    flightHolder.setAttribute('class', 'addFlightField-Holder')
-    flightHolder.setAttribute('id',`${fTripName}-addFlightField-Holder`)
-    destSection.appendChild(flightHolder)
-
-    let weatherDescription = document.createElement('div')
-    weatherDescription.setAttribute('class', 'weatherDesc')
-    weatherDescription.setAttribute('id', `${fTripName}-weatherDesc`)
-    weatherDescription.innerHTML = `The weather forecast is: ${fResult.weatherDesc}`
-    destSection.appendChild(weatherDescription)
-
-    let weatherIcon = document.createElement('img')
-    weatherIcon.setAttribute('src',fResult.weatherIconLink)
-    weatherIcon.setAttribute('class', 'weatherIcon')
-    weatherIcon.setAttribute('id', `${fTripName}-weatherIcon`)
-    destSection.appendChild(weatherIcon)
-
-    let minTemp = document.createElement('div')
-    minTemp.setAttribute('class','minTemp')
-    minTemp.setAttribute('id',`${fTripName}-minTemp`)
-    minTemp.innerHTML = `The minimum temperature is: ${fResult.destMinTemp} degrees celcius`
-    destSection.appendChild(minTemp)
-
-    let maxTemp = document.createElement('div')
-    maxTemp.setAttribute('class','maxTemp')
-    maxTemp.setAttribute('id', `${fTripName}-maxTemp`)
-    maxTemp.innerHTML = `The maximum temperature is: ${fResult.destMaxTemp} degrees celcius`
-    destSection.appendChild(maxTemp)
-
-    let imgPlaceHolder = document.createElement('img')
-    imgPlaceHolder.setAttribute('class','imgPlaceHolder')
-    imgPlaceHolder.setAttribute('id', `${fTripName}-imgPlaceHolder`)
-    imgPlaceHolder.setAttribute('src', fResult.destImgSource)
-    destSection.appendChild(imgPlaceHolder)
+    */
 }
 
 // Function to remove trip

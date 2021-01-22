@@ -25,17 +25,6 @@ function addHotel(event){
     const hotelName = document.getElementById(hotelField).value
     const hotelNHolder = document.getElementById(`${hotelField}-Holder`)
 
-    const hotelH = document.getElementById(`hotelHeader-${hotelField}`)
-
-    if(hotelH == null){
-
-        let hotelHead = document.createElement('h2')
-        hotelHead.setAttribute('id',`hotelHeader-${hotelField}`)
-        hotelHead.innerHTML = 'Hotel(s)'
-        hotelNHolder.appendChild(hotelHead)
-
-    }
-
     let hotelPlaceHolder = document.createElement('div')
     hotelPlaceHolder.innerHTML = hotelName
     hotelPlaceHolder.setAttribute('class','hotelName')
@@ -50,17 +39,6 @@ function addFlight(event){
     const flightField = event.target.name
     const flightName = document.getElementById(flightField).value
     const flightNHolder = document.getElementById(`${flightField}-Holder`)
-
-    const flightH = document.getElementById(`flightHeader-${flightField}`)
-
-    if(flightH == null){
-
-        let flightHead = document.createElement('h2')
-        flightHead.setAttribute('id',`flightHeader-${flightField}`)
-        flightHead.innerHTML = 'Flight(s)'
-        flightNHolder.appendChild(flightHead)
-
-    }
 
     let flightPlaceHolder = document.createElement('div')
     flightPlaceHolder.innerHTML = flightName
@@ -88,7 +66,7 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     tripHeading.appendChild(lTripHeading)
 
     // Trip Name
-    let tripName = document.createElement('h2')
+    let tripName = document.createElement('h3')
     tripName.innerHTML = fTripName
     lTripHeading.appendChild(tripName)
 
@@ -208,10 +186,10 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     startDate.setAttribute('class','startDate')
     startDate.setAttribute('id',`${fTripName}-startDate`)
     if(fTripLength == 0){
-        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for the day itself!`
+        startDate.innerHTML = `The trip will only last for the day itself!`
 
     }else{
-        startDate.innerHTML = `Your travel starts on the: ${fStartDate} and will last for ${fTripLength} day(s)!`
+        startDate.innerHTML = `The trip will last for ${fTripLength} day(s)!`
     }
     rTripMiddle.appendChild(startDate)
 
@@ -231,6 +209,11 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     hotelHolder.setAttribute('id',`${fTripName}-addHotelField-Holder`)
     lTripEnd.appendChild(hotelHolder)
 
+    let hotelHead = document.createElement('h3')
+    hotelHead.setAttribute('id',`hotelHeader-${fTripName}-addHotelField`)
+    hotelHead.innerHTML = 'Hotel(s)'
+    hotelHolder.appendChild(hotelHead)
+
     // Trip End Right column
     let rTripEnd = document.createElement('div')
     rTripEnd.setAttribute('class','rTripEndContainer')
@@ -242,12 +225,21 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     flightHolder.setAttribute('id',`${fTripName}-addFlightField-Holder`)
     rTripEnd.appendChild(flightHolder)
 
+    let flightHead = document.createElement('h3')
+    flightHead.setAttribute('id',`flightHeader-${fTripName}-addFlightField`)
+    flightHead.innerHTML = 'Flight(s)'
+    flightHolder.appendChild(flightHead)
+
+    let tripRemove = document.createElement('div')
+    tripRemove.setAttribute('class','tripRemoveContainer')
+    tripSection.appendChild(tripRemove)
+
     let removeButton = document.createElement('button')
     removeButton.innerHTML = 'Remove'
     removeButton.setAttribute('name', fTripName)
     removeButton.setAttribute('class', 'removeButtons')
     removeButton.addEventListener('click',removeTrip)
-    tripSection.appendChild(removeButton)
+    tripRemove.appendChild(removeButton)
 /*
     let destSection = document.createElement('div')
     destSection.setAttribute('id',`${fTripName}-${fDestinationName}`)

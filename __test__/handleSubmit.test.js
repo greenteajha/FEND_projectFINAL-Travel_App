@@ -3,7 +3,7 @@ import { retrieveResults } from "../src/client/js/formHandler"
 
 // Run test to 
 describe ('FORM HANDLING TEST', () => {
-    test('Check if submission of valid URL to the backend returns an API result', async () => {
+    test('Check if submission of a valid country name and the date difference to the backend returns an API result', async () => {
 
         const testData = {
             cName: 'maldives',

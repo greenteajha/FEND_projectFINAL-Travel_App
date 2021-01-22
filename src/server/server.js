@@ -114,8 +114,6 @@ app.post('/apirequest', async function(req, res){
                     weatherBitTemp = weatherBitData.data[weatherBitData.data.length-1]    
                 }
 
-                console.log(weatherBitTemp)
-
                 const destMinTemp = weatherBitTemp.min_temp
                 const destMaxTemp = weatherBitTemp.max_temp
                 const weatherIconLink = `https://www.weatherbit.io/static/img/icons/${weatherBitTemp.weather.icon}.png`
@@ -141,7 +139,7 @@ app.post('/apirequest', async function(req, res){
             } catch (Error){
                 console.log("ERROR MESSAGE: ", Error)
             }
-        }
+        }        
         
     } catch (Error){
         console.log("ERROR MESSAGE: ", Error)

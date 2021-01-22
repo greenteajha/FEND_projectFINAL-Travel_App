@@ -48,7 +48,7 @@ function addFlight(event){
 }
 
 // Function to add a new trip
-function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifference, fDestinationName, fResult){
+function addTrip(fUserResult, fTripName, fTripLength, fDateDifference, fDestinationName, fResult){
 
     let tripSection = document.createElement('div')
     tripSection.setAttribute('class','tripSection')
@@ -240,12 +240,6 @@ function addTrip(fUserResult, fStartDate, fTripName, fTripLength, fDateDifferenc
     removeButton.setAttribute('class', 'removeButtons')
     removeButton.addEventListener('click',removeTrip)
     tripRemove.appendChild(removeButton)
-/*
-    let destSection = document.createElement('div')
-    destSection.setAttribute('id',`${fTripName}-${fDestinationName}`)
-    destSection.setAttribute('class', 'destinationSection')
-    tripSection.appendChild(destSection)
-    */
 }
 
 // Function to remove trip
@@ -302,11 +296,11 @@ function handleSubmit(event) {
         const dateDifference = Math.floor(Math.abs((Date.parse(uStartDate) - todayDate)/(1000 * 60 * 60 * 24)))
         const tripLength = Math.floor(Math.abs((Date.parse(uEndDate) - Date.parse(uStartDate))/(1000 * 60 * 60 * 24)))
 
-        retrieveResults({cName, startDate, dateDifference})
+        retrieveResults({cName, dateDifference})
         .then(
             function(result){
 
-                addTrip(userResults, uStartDate, tripName, tripLength, dateDifference, cName, result)
+                addTrip(userResults, tripName, tripLength, dateDifference, cName, result)
                 
             }
         )
@@ -315,3 +309,4 @@ function handleSubmit(event) {
 
 export { handleSubmit }
 export { printPage }
+export { retrieveResults }

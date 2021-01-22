@@ -54,7 +54,8 @@ module.exports = {
             protectWebpackAssets: false
         }),
         //new WorkboxPlugin.GenerateSW(),
-
+        new WorkboxPlugin.GenerateSW(),
+        
         new MiniCssExtractPlugin({
             // Whatever name pattern you need
             filename: `main.css`

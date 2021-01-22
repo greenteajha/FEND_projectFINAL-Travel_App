@@ -193,6 +193,10 @@ h3{
         color: black;
         border: 0px;
 
+        &:hover {
+            background-color: #5AB8A5;
+        }
+
         @media (max-width: $xsDeviceMax){
             border-radius: 10px;
             width: 100px;
@@ -357,6 +361,10 @@ h3{
                 padding: 5px;
                 border-radius: 5px;
                 margin-left: 10px;
+
+                &:hover {
+                    background-color: #5AB8A5;                
+                }
 
                 @media (max-width: $xsDeviceMax){
                     height: 20px;
@@ -561,6 +569,10 @@ h3{
             border-radius: 10px;
             margin: 10px;
             width: max-content;
+
+            &:hover {
+                background-color: #5AB8A5;
+            }
 
             @media (max-width: $xsDeviceMax){
                 height: 30px;

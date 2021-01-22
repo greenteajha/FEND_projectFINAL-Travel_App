@@ -1,7 +1,7 @@
 $xsDeviceMax: 600px;
 $sDeviceMax: 767px;
 $mDeviceMax: 991px;
-$lDeviceMax: 1199px;
+$lDeviceMax: 1200px;
 $xlDeviceMin: 1200px;
 
 html{
@@ -18,49 +18,97 @@ body{
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+
+    @media (max-width: $xsDeviceMax){
+        font-size: 14px;
+    }
+
+    @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+        font-size: 16px;
+    }
+
+    @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+        font-size: 18px;
+    }
+
+    @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+        font-size: 20px;
+    }
+
+    @media (min-width: $xlDeviceMin){
+        font-size: 22px;
+    }
 }
 
 #overallContainer{
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 0.8fr;
+    grid-template-columns: 90vw;
     grid-auto-rows: minmax(100px, auto);
-
-    @media (max-width: 600px){
-        grid-template-columns: 90vw;
-        grid-auto-rows: minmax(100px, auto);
-    }
 }
 
 h1{
     background-color: rgba(255, 255, 255, 0.6);
     text-align: center;
-    border-radius: 10px;
-    font-size: 35px;
     margin-top: 50px;
     margin-bottom: 20px;
     padding: 10px;
 
-    @media (max-width: 600px){
+    @media (max-width: $xsDeviceMax){
         border-radius: 10px;
         font-size: 20px;
-        margin-top: 50px;
-        margin-bottom: 20px;
-        padding: 10px;
+    }
+
+    @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+        border-radius: 12px;
+        font-size: 25px;
+    }
+
+    @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+        border-radius: 14px;
+        font-size: 30px;
+    }
+
+    @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+        border-radius: 16px;
+        font-size: 35px;
+    }
+
+    @media (min-width: $xlDeviceMin){
+        border-radius: 18px;
+        font-size: 40px;
     }
 }
 
 h3{
     margin: 0px;
-    padding: 10px;
-    font-size: 25px;
+    text-align: center;
+    width: max-content;
 
-    @media (max-width: 600px){
+    @media (max-width: $xsDeviceMax){
         padding: 5px;
-        font-size: 15px;
-        width: max-content;
-        text-align: center;
+        font-size: 22px;
+    }
+
+    @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+        padding: 7px;
+        font-size: 24px;
+    }
+
+    @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+        padding: 9px;
+        font-size: 26px;
+    }
+
+    @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+        padding: 11px;
+        font-size: 28px;
+    }
+
+    @media (min-width: $xlDeviceMin){
+        padding: 13px;
+        font-size: 30px;
     }
 }
 
@@ -74,19 +122,38 @@ h3{
     }
 
     .formFields{
-        font-size: 20px;
+        text-align: center;
         width: 80%;
-        height: 30px;
         margin: 0px;
-        padding: 10px;
 
-        @media (max-width: 600px){
-            text-align: center;
+        @media (max-width: $xsDeviceMax){
             font-size: 10px;
-            width: 80%;
             height: 15px;
-            margin: 0px;
             padding: 5px;
+        }
+
+        @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+            font-size: 15px;
+            height: 20px;
+            padding: 7px;
+        }       
+        
+        @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+            font-size: 20px;
+            height: 25px;
+            padding: 9px;
+        }
+
+        @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+            font-size: 25px;
+            height: 30px;
+            padding: 11px;
+        }
+    
+        @media (min-width: $xlDeviceMin){
+            font-size: 30px;
+            height: 35px;
+            padding: 13px;
         }
     }
 }
@@ -124,40 +191,65 @@ h3{
     .fieldButtons{
         background-color: #73EBD3;
         color: black;
-        border-radius: 10px;
         border: 0px;
-        width: 40%;
-        height: 50px;
-        padding: 10px;
-        font-size: 18px;
 
-        @media (max-width: 600px){
+        @media (max-width: $xsDeviceMax){
             border-radius: 10px;
-            border: 0px;
             width: 100px;
             height: 30px;
             padding: 10px;
             font-size: 10px;
         }
+
+        @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+            border-radius: 12px;
+            width: 120px;
+            height: 35px;
+            padding: 12px;
+            font-size: 12px;
+        }
+
+        @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+            border-radius: 14px;
+            width: 140px;
+            height: 40px;
+            padding: 14px;
+            font-size: 14px;
+        }
+
+        @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+            border-radius: 16px;
+            width: 160px;
+            height: 45px;
+            padding: 16px;
+            font-size: 16px;
+        }
+    
+        @media (min-width: $xlDeviceMin){
+            border-radius: 18px;
+            width: 180px;
+            height: 50px;
+            padding: 18px;
+            font-size: 18px;
+        }
     }
 }
 
 .tripSection{
+    background-color: rgba(255, 255, 255, 0.8);
     display: grid;
-    grid-template-rows: 150px 300px auto 80px;
+    grid-template-columns: 80vw;
+    grid-template-rows: 150px 400px auto 80px;
     grid-template-areas:
     "a"
     "b"
     "c"
     "d";
     background-color: white;
-    border-radius: 15px;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
 
-    @media (max-width: 600px){
-        background-color: rgba(255, 255, 255, 0.8);
+    @media (max-width: $xsDeviceMax){
         grid-template-columns: 80vw;
         grid-template-rows: auto auto auto auto auto auto auto;
         grid-template-areas:
@@ -168,15 +260,41 @@ h3{
         "e"
         "f"
         "g";
-        
+        border-radius: 10px;
+        margin-top: 50px;
+    }
+
+    @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+        border-radius: 12px;
+        margin-top: 55px;
+    }
+
+    @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+        border-radius: 14px;
+        margin-top: 60px;
+    }
+
+    @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+        border-radius: 16px;
+        margin-top: 65px;
+    }
+
+    @media (min-width: $xlDeviceMin){
+        border-radius: 18px;
+        margin-top: 70px;
     }
 
     .tripHeadingContainer{
         height: 100%;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        flex-direction: row;
+        grid-area: a;
+
+        @media (max-width: $xsDeviceMax){
+            flex-direction: column;
+        }
 
         .lTripHeadingContainer{
             display: flex;
@@ -186,88 +304,113 @@ h3{
             width: 50%;
             height: 100%;
 
-            @media (max-width: 600px){
+            @media (max-width: $xsDeviceMax){
                 grid-area: a;
             }
 
             .destName{
-                @media (max-width: 600px){
-                    width: max-content;
-                    font-size: 12px;
-                }
+                width: max-content;
+
             }
         }
 
         .rTripHeadingContainer{
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
 
-            @media (max-width: 600px){
+            @media (max-width: $xsDeviceMax){
                 grid-area: b;
                 flex-direction: row;
             }
 
+            input{
+                width: 95%;
+
+                @media (max-width: $xsDeviceMax){
+                    height: 22px;
+                }
+
+                @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+                    height: 24px;
+                }
+
+                @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+                    height: 26px;
+                }
+
+                @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+                    height: 28px;
+                }
+            
+                @media (min-width: $xlDeviceMin){
+                    height: 30px;
+                }
+            }
+
+            button{
+                background-color: #73EBD3;
+                color: black;
+                border: 0px;
+                padding: 5px;
+                border-radius: 5px;
+                margin-left: 10px;
+
+                @media (max-width: $xsDeviceMax){
+                    height: 20px;
+                    font-size: 12px;
+                    width: 120px;
+                    margin-top: 10px;
+                }
+
+                @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+                    height: 25px;
+                    font-size: 14px;
+                    width: 140px;
+                }
+
+                @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+                    height: 30px;
+                    font-size: 16px;
+                    width: 160px;
+                }
+
+                @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+                    height: 35px;
+                    font-size: 18px;
+                    width: 180px;
+                }
+            
+                @media (min-width: $xlDeviceMin){
+                    height: 40px;
+                    font-size: 20px;
+                    width: 200px;
+                }
+            }
+
             .hotelHeading{
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 margin: 10px;
 
-                input{
-                    @media (max-width: 600px){
-                        height: 18px;
-                        width: 95%;
-                    }
-                }
-
-                button{
-                    background-color: #73EBD3;
-                    color: black;
-                    border-radius: 5px;
-                    border: 0px;
-                    width: 100px;
-                    height: 50px;
-                    padding: 5px;
-                    font-size: 12px;
-                    @media (max-width: 600px){
-                        border-radius: 5px;
-                        height: 20px;
-                        margin-top: 10px;
-                        font-size: 10px;
-                    }
+                @media (max-width: $xsDeviceMax){
+                    flex-direction: column;
                 }
             }
 
             .flightHeading{
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 margin: 10px;
 
-                input{
-                    @media (max-width: 600px){
-                        height: 18px;
-                        width: 95%;
-                    }
-                }
-
-                button{
-                    background-color: #73EBD3;
-                    color: black;
-                    border-radius: 5px;
-                    border: 0px;
-                    width: 100px;
-                    height: 50px;
-                    padding: 5px;
-                    font-size: 12px;
-                    @media (max-width: 600px){
-                        border-radius: 5px;
-                        height: 20px;
-                        margin-top: 10px;
-                        font-size: 10px;
-                    }
+                @media (max-width: $xsDeviceMax){
+                    flex-direction: column;
                 }
             }
         }
@@ -277,9 +420,14 @@ h3{
         height: 100%;
         width: 100%;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        grid-area: b;
+        flex-direction: row;
+
+        @media (max-width: $xsDeviceMax){
+            flex-direction: column;
+        }
 
         .lTripMiddleContainer{
             display: flex;
@@ -287,8 +435,10 @@ h3{
             justify-content: center;
             align-items: center;
             height: 100%;
+            margin: 15px;
+            width: 50%;
 
-            @media (max-width: 600px){
+            @media (max-width: $xsDeviceMax){
                 grid-area: c;
                 width: 100%;
             }
@@ -296,10 +446,7 @@ h3{
             .imgPlaceHolder{
                 width: 100%;
                 max-height: 100%;
-
-                @media (max-width: 600px){
-                    margin: 15px;
-                }
+                margin: 15px;
             }
         }
 
@@ -308,18 +455,29 @@ h3{
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
             width: 50%;
             height: 100%;
 
-            @media (max-width: 600px){
-                grid-area: d;
-                font-size: 12px;
-                width: 100%;
-            }
-
             .weatherIcon{
-                @media (max-width: 600px){
+                @media (max-width: $xsDeviceMax){
                     width: 15%;
+                }
+
+                @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+                    width: 20%;
+                }
+
+                @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+                    width: 25%;
+                }
+
+                @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+                    width: 30%;
+                }
+            
+                @media (min-width: $xlDeviceMin){
+                    width: 35%;
                 }
             }
 
@@ -327,17 +485,34 @@ h3{
     }
 
     .tripEndContainer{
+        grid-area: c;
         height: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         text-align: center;
+        margin-top: 20px;
+        
 
-        @media (max-width: 600px){
-            flex-direction: row;
-            margin-top: 20px;
-            font-size: 12px;
+        @media (max-width: $xsDeviceMax){
+            font-size: 10px;
+        }
+
+        @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+            font-size: 15px;
+        }
+
+        @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+            font-size: 20px;
+        }
+
+        @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+            font-size: 25px;
+        }
+    
+        @media (min-width: $xlDeviceMin){
+            font-size: 30px;
         }
 
         .lTripEndContainer{
@@ -348,7 +523,7 @@ h3{
             width: 50%;
             height: 100%;
 
-            @media (max-width: 600px){
+            @media (max-width: $xsDeviceMax){
                 grid-area: e;
             }
 
@@ -362,7 +537,7 @@ h3{
             width: 50%;
             height: 100%;
 
-            @media (max-width: 600px){
+            @media (max-width: $xsDeviceMax){
                 grid-area: f;
             }
 
@@ -374,24 +549,47 @@ h3{
         justify-content: center;
         align-items: center;
 
+        @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {
+            grid-area: d;
+        }
+
         .removeButtons{
             background-color: #73EBD3;
             color: black;
-            border-radius: 10px;
+            grid-area: g;
             border: 0px;
-            width: 250px;
-            height: 50px;
-            padding: 10px;
-            font-size: 18px;
+            border-radius: 10px;
+            margin: 10px;
+            width: max-content;
 
-            @media (max-width: 600px){
-                grid-area: g;
-                border: 0px;
-                margin: 10px;
-                width: 100px;
+            @media (max-width: $xsDeviceMax){
                 height: 30px;
                 padding: 10px;
                 font-size: 10px;
+            }
+
+            @media (min-width: $xsDeviceMax) and (max-width: $sDeviceMax) {               
+                height: 40px;
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            @media (min-width: $sDeviceMax) and (max-width: $mDeviceMax) {
+                height: 50px;
+                padding: 14px;
+                font-size: 20px;
+            }
+
+            @media (min-width: $mDeviceMax) and (max-width: $lDeviceMax) {
+                height: 60px;
+                padding: 16px;
+                font-size: 25px;
+            }
+        
+            @media (min-width: $xlDeviceMin){
+                height: 70px;
+                padding: 18px;
+                font-size: 30px;
             }
         }
     }

@@ -30,15 +30,21 @@ app.use(cors());
 
 // Use Jest for unit testing
 const { TestScheduler } = require('jest');
+const { Module } = require("webpack");
 
 // Initialize the "dist" folder
 app.use(express.static('dist'));
 
-// designates what port the app will listen to for incoming requests
-let listeningPort = 8081;
-app.listen(listeningPort, function () {
-    console.log('Example app listening on port 8081!')
-})
+const listeningPort = 8081;
+
+/*
+const server = app.listen(listeningPort, function () {
+    const port = server.address().port;
+    console.log(`Web Application is listening at port ${port}`);
+});
+*/
+
+module.exports = app
 
 // Deliver index.html file main page to web clients
 app.get('/', function (req, res) {
